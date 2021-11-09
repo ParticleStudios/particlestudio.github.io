@@ -14,7 +14,6 @@ export default class MainDocument extends Document {
                     <meta property='og:image' content='https://particlestudios.org/logo.svg' />
                     <meta property='og:keywords' content='Particle Studios, Studios, Games, Game Development, C++, Unity, Java, OpenGL, Vulkan' />
                     <link rel="icon" href="/images/logo.svg" />
-                    <title>Particle Studios</title>
                 </Head>
 
                 <body className='w-full h-full bg-gray-1000 text-gray-50 font-sans'>

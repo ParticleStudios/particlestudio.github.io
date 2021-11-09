@@ -3,6 +3,7 @@ import * as THREE from "three";
 import {Float32BufferAttribute} from "three";
 
 const circleVert = `
+in vec3 offset;
 uniform float time;
 
 ${THREE.ShaderChunk.common}
@@ -14,7 +15,7 @@ void main() {
 
     float xPos = position.x;
     float zPos = position.z;
-    float yPos = (sin((xPos + time) * 0.3) * 50.0) + (sin((zPos + time) * 0.5) * 50.0);
+    float yPos = (sin((offset.x + time) * 0.3) * 50.0) + (sin((offset.z + time) * 0.5) * 50.0);
    
     vec4 modelViewPosition = modelViewMatrix * vec4(xPos, yPos, zPos, 1.0);
     gl_Position = projectionMatrix * modelViewPosition;  
@@ -74,17 +75,20 @@ function createParticles() {
     });
 
     let points = [];
+    let offsets = [];
 
     for (let x = 0; x < 100; x++) {
         for (let z = 0; z < 100; z++) {
             let px = x * particleSpacing - ((particleSpacing * particleAmt) / 2);
             let pz = z * particleSpacing - ((particleSpacing * particleAmt) / 2);
             points.push(px, 0, pz);
+            offsets.push(x, 0, z);
         }
     }
 
     let dotGeometry = new THREE.BufferGeometry();
     dotGeometry.setAttribute('position', new Float32BufferAttribute(points, 3));
+    dotGeometry.setAttribute('offset', new Float32BufferAttribute(offsets, 3));
 
     return {
         points: new THREE.Points(dotGeometry, shaderMaterial),
