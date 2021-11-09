@@ -34,7 +34,7 @@ ${THREE.ShaderChunk.common}
 ${THREE.ShaderChunk.fog_pars_fragment}
 
 vec3 rainbow() {
-    vec4 outCol = mod(vec4(1, 2, 3, 0) - 3.0 * (elapsedTime / 5.0), 3.0);
+    vec4 outCol = mod(vec4(1, 2, 3, 0) - 3.0 * (elapsedTime / 15.0), 3.0);
     outCol = min(outCol, 2.0 - outCol);
     
     return outCol.xyz;
@@ -44,9 +44,9 @@ void main() {
     vec2 xy = gl_PointCoord.xy - vec2(0.5);
     float radius = length(xy);
     
-    //vec3 mixedColor = vec3(1, cos(elapsedTime), sin(elapsedTime));
-    vec3 mixedColor = rainbow();
-    gl_FragColor = vec4(mixedColor, step(radius, 0.5));
+    //vec3 mixedColor = vec3(1.0, cos(elapsedTime), sin(elapsedTime));
+    //vec3 mixedColor = rainbow();
+    gl_FragColor = vec4(rainbow(), step(radius, 0.5));
     //gl_FragColor = vec4(color, step(radius, 0.5));
     
     ${THREE.ShaderChunk.fog_fragment}
