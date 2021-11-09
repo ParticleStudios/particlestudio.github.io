@@ -1,6 +1,7 @@
 import React from "react";
 import * as THREE from "three";
 import {Float32BufferAttribute} from "three";
+import ReactGA from "react-ga";
 
 const circleVert = `
 in vec3 offset;
@@ -130,6 +131,7 @@ export default class HomePage extends React.Component {
 
     componentDidMount() {
         window.addEventListener('resize', this.windowResizedEvent);
+        ReactGA.pageview(window.location.pathname);
 
         const renderSettings = {
             antialias: true,

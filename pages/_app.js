@@ -1,5 +1,8 @@
 import Head from "next/head";
+import ReactGA from 'react-ga';
 import 'tailwindcss/tailwind.css';
+
+ReactGA.initialize('G-MXXSZKYDXL');
 
 function App({Component, pageProps}) {
 
